@@ -92,4 +92,3 @@ Contributions are welcome! Feel free to submit a pull request or open an issue.
 2. Create a new branch for your feature or bug fix.
 3. Commit your changes and push to your branch.
 4. Submit a pull request for review.
-
