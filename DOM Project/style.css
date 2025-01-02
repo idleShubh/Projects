@@ -20,7 +20,7 @@
 /* Base Styles */
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter',Light 400, sans-serif;
     transition: var(--transition);
     line-height: 1.6;
 }
@@ -122,6 +122,7 @@ input, select, button {
     font-size: 1rem;
     transition: var(--transition);
     margin: 10px;
+    font-family: font-family: 'Inter',Light 200, sans-serif;;
 }
 
 .dark input, 
@@ -140,6 +141,11 @@ select:focus {
 .input-group {
     display: flex;
     gap: 1rem;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
 }
 
 .submit-btn {

@@ -44,9 +44,13 @@ const themeToggle = document.getElementById('themeToggle');
             const perPerson = totalAmount / participants.length;
 
             const resultsHTML = participants
+            
                 .map(p => {
                     const balance = (p.amount - perPerson).toFixed(2);
-                    return `<p>${p.name} ${balance >= 0 ? 'is owed' : 'owes'} ₹${Math.abs(balance)}</p>`;
+                    if (balance == 0) {
+                        return `<p>${p.name} has paid  the whole amount of ₹${Math.abs(balance)}</p>`;
+                    }
+                    return `<p>${p.name} ${balance >= 0 ? 'has given extra' : 'owes'} ₹${Math.abs(balance)}</p>`;
                 })
                 .join('');
 
