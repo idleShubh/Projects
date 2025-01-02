@@ -42,22 +42,6 @@ Simplify splitting expenses between friends with this user-friendly web app. The
 
 ---
 
-## Installation and Usage
-
-1. Clone the repository or download the source code:
-   ```bash
-   git clone https://github.com/your-username/dynamic-expense-splitter.git
-   ```
-
-2. Navigate to the project folder:
-   ```bash
-   cd dynamic-expense-splitter
-   ```
-
-3. Open the `index.html` file in your browser to start using the app.
-
----
-
 ## Example Scenario
 
 **You and three friends go out for dinner:**
