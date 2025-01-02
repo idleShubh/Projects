@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dynamic Expense Splitter</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
-</body>
+<body class="light">
+    <div class="container">
+        <div class="toggle-theme">
+            <button id="themeToggle">Switch to Dark Mode</button>
+        </div>
+        <h1>Dynamic Expense Splitter</h1>
+
+        <div class="form-container">
+            <input type="text" id="name" placeholder="Name" />
+            <input type="number" id="amount" placeholder="Amount" />
+            <button id="addParticipant">Add</button>
+        </div>
+
+        <table class="expense-table" id="participantsTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="results" id="results">
+            <p>No data yet. Add participants and their expenses!</p>
+        </div>
+    </div>
 </html>
