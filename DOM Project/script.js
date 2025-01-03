@@ -5,8 +5,16 @@ const themeToggle = document.getElementById('themeToggle');
         const addParticipantButton = document.getElementById('addParticipant');
         const participantsTableBody = document.querySelector('#participantsTable tbody');
         const resultsDiv = document.getElementById('results');
+        const currencySelect = document.getElementById('currencySelect');
 
         let participants = [];
+
+        const currencies = {
+            'INR': '₹',
+            'USD': '$',
+            'EUR': '€',
+            'GBP': '£'
+        };
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark');
@@ -25,7 +33,7 @@ const themeToggle = document.getElementById('themeToggle');
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${participant.name}</td>
-                    <td>${participant.amount}</td>
+                    <td>${currencies[participant.currency]}${participant.amount}</td>
                     <td><button onclick="removeParticipant(${index})">Remove</button></td>
                 `;
                 participantsTableBody.appendChild(row);
@@ -40,19 +48,28 @@ const themeToggle = document.getElementById('themeToggle');
                 return;
             }
 
-            const totalAmount = participants.reduce((sum, p) => sum + p.amount, 0);
-            const perPerson = totalAmount / participants.length;
+            const byCurrency = participants.reduce((acc, p) => {
+                if (!acc[p.currency]) acc[p.currency] = [];
+                acc[p.currency].push(p);
+                return acc;
+            }, {});
 
-            const resultsHTML = participants
-            
-                .map(p => {
-                    const balance = (p.amount - perPerson).toFixed(2);
-                    if (balance == 0) {
-                        return `<p>${p.name} has paid  the whole amount of ₹${Math.abs(balance)}</p>`;
-                    }
-                    return `<p>${p.name} ${balance >= 0 ? 'has given extra' : 'owes'} ₹${Math.abs(balance)}</p>`;
-                })
-                .join('');
+            const resultsHTML = Object.entries(byCurrency).map(([currency, group]) => {
+                const totalAmount = group.reduce((sum, p) => sum + p.amount, 0);
+                const perPerson = totalAmount / group.length;
+                
+                const groupResults = group
+                    .map(p => {
+                        const balance = (p.amount - perPerson).toFixed(2);
+                        if (balance == 0) {
+                            return `<p>${p.name} has paid the whole amount of ${currencies[currency]}${Math.abs(balance)}</p>`;
+                        }
+                        return `<p>${p.name} ${balance >= 0 ? 'has given extra' : 'owes'} ${currencies[currency]}${Math.abs(balance)}</p>`;
+                    })
+                    .join('');
+                
+                return `<h3>${currency} Group</h3>${groupResults}`;
+            }).join('');
 
             resultsDiv.innerHTML = resultsHTML;
         }
@@ -65,13 +82,14 @@ const themeToggle = document.getElementById('themeToggle');
         addParticipantButton.addEventListener('click', () => {
             const name = nameInput.value.trim();
             const amount = parseFloat(amountInput.value);
+            const currency = currencySelect.value;
 
             if (!name || isNaN(amount) || amount <= 0) {
                 alert('Please enter a valid name and amount.');
                 return;
             }
 
-            participants.push({ name, amount });
+            participants.push({ name, amount, currency });
             nameInput.value = '';
             amountInput.value = '';
 
