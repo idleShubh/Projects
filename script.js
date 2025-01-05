@@ -1,4 +1,4 @@
-const themeToggle = document.getElementById('themeToggle');
+ const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         const nameInput = document.getElementById('name');
         const amountInput = document.getElementById('amount');
